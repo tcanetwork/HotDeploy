@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5074E604-DBB9-4B9C-B0C0-12AE69530032}</ProjectGuid>
+    <ProjectGuid>{2490F99E-FBE3-4EC3-9627-01BCFD25D686}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GlobalLauncher</RootNamespace>
+    <RootNamespace>LocalServer</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,11 +151,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LibCommon\LibCommon.vcxproj">
-      <Project>{597a7336-2817-4eae-9fa9-a9ecb3d1a3da}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

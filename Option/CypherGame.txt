@@ -1,0 +1,3 @@
+EXE_PATH:Cypher.exe
+DOWNLOAD_APP_DIR:Cypher\App\
+DOWNLOAD_VERSION_DIR:Cypher\Version\
