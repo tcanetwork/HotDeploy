@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;$(SolutionDir)/LibGlobalNetwork;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;$(SolutionDir)/LibGlobalNetwork;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;$(SolutionDir)/LibGlobalNetwork;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,7 +140,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/LibCommon;$(SolutionDir)/LibGlobalNetwork;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,12 +150,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GlobalDownloader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibCommon\LibCommon.vcxproj">
       <Project>{597a7336-2817-4eae-9fa9-a9ecb3d1a3da}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\LibGlobalNetwork\LibGlobalNetwork.vcxproj">
+      <Project>{1e7a60e7-b435-4773-b1f0-ea215587b31a}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GlobalDownloader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,7 @@
 #include <string>
 #include <Shlwapi.h>
 #include <ImageHlp.h>
+#include "stringConverter.h"
 
 #pragma comment( lib, "Shlwapi.lib" )
 #pragma comment( lib, "imagehlp.lib" )
@@ -62,30 +63,16 @@ void Ftp::getFindData( std::string dir, std::vector< std::string >& data ) {
 }
 
 void Ftp::download( std::string ftp_path, std::string local_path ) {
+	convertString( ftp_path  , "/", "\\" );
+	convertString( local_path, "/", "\\" );
 	//ディレクトリ
 	std::string dir;
 	{
 		char buf[ 128 ];
 		GetCurrentDirectory( 128, buf );
-		std::string str1 = "\\";
-		std::string str2 = "/";
-		std::string::size_type pos = max( ( int )local_path.find_last_of( str1 ), ( int )local_path.find_last_of( str2 ) );
-		dir = ( std::string )buf + "/" + local_path.substr( 0, pos ) + "/";
-		pos = dir.find( str2 );
-		while ( pos != std::string::npos ) {
-			dir.replace( pos, str2.length( ), str1 );
-			pos = dir.find( str2 );
-		}
-		pos = ftp_path.find( str1 );
-		while ( pos != std::string::npos ) {
-			ftp_path.replace( pos, str1.length( ), str2 );
-			pos = ftp_path.find( str1 );
-		}
-		pos = local_path.find( str1 );
-		while ( pos != std::string::npos ) {
-			local_path.replace( pos, str1.length( ), str2 );
-			pos = local_path.find( str1 );
-		}
+		std::string::size_type dir_last_pos = max( ( int )local_path.find_last_of( "\\" ), ( int )local_path.find_last_of( "/" ) );
+		dir = ( std::string )buf + "\\" + local_path.substr( 0, dir_last_pos ) + "\\";
+		convertString( dir, "/", "\\" );
 	}
 	if ( !PathIsDirectory( dir.c_str( ) ) ) {
 		MakeSureDirectoryPathExists( dir.c_str( ) );

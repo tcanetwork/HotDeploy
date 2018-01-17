@@ -131,7 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Excute.cpp" />
+    <ClCompile Include="Execute.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Log.cpp" />
@@ -139,11 +139,12 @@
     <ClCompile Include="WinSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Excute.h" />
+    <ClInclude Include="Execute.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Option.h" />
+    <ClInclude Include="stringConverter.h" />
     <ClInclude Include="WinSocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

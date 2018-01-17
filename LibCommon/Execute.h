@@ -4,10 +4,10 @@
 #include <string>
 #include "Log.h"
 
-class Excute {
+class Execute {
 public:
-	Excute( std::string exe, std::shared_ptr< Log > log );
-	virtual ~Excute( );
+	Execute( std::string exe_path );
+	virtual ~Execute( );
 public:
 	void open( );
 	void close( );

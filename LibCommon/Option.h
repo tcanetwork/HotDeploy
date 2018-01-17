@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <map>
 
 class Option {
 public:
@@ -13,8 +14,13 @@ public:
 	Option( );
 	virtual ~Option( );
 public:
+	int getId( ) const;
+	OptionData getData( int id ) const;
+	int getMaxId( );
+private:
 	void load( );
 private:
-	std::vector< OptionData > _data;
+	int _id;
+	std::map< int, OptionData > _data;
 };
 

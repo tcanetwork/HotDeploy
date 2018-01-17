@@ -1,0 +1,14 @@
+ID:1
+NAME:CypherGame
+EXE:Cypher.exe
+DOWNLOAD:Cypher\App\
+
+ID:4
+NAME:CypherLive
+EXE:Live.exe
+DOWNLOAD:Cypher\App\
+
+ID:7
+NAME:CypherController
+EXE:Controller.exe
+DOWNLOAD:Cypher\App\
