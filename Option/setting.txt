@@ -1,14 +1,17 @@
-ID:1
-NAME:CypherGame
-EXE:Cypher.exe
-DOWNLOAD:Cypher\App\
+GameId:1
+Name:CypherGame
+ExePath:Cypher.exe
+FtpDir:Cypher\App\
+LocalDir:Cypher\App\
 
-ID:4
-NAME:CypherLive
-EXE:Live.exe
-DOWNLOAD:Cypher\App\
+GameId:4
+Name:CypherLive
+ExePath:Live.exe
+FtpDir:Cypher\App\
+LocalDir:Cypher\App\
 
-ID:7
-NAME:CypherController
-EXE:Controller.exe
-DOWNLOAD:Cypher\App\
+GameId:7
+Name:CypherController
+ExePath:Controller.exe
+FtpDir:Cypher\App\
+LocalDir:Cypher\App\

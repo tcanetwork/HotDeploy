@@ -42,6 +42,7 @@ void Ftp::open( ) {
 
 void Ftp::getFindData( std::string dir, std::vector< std::string >& data ) {
 	//FTP内のdir内を検索
+	convertString( dir, "\\", "/" );
 	open( );
 	WIN32_FIND_DATAA find_data = WIN32_FIND_DATAA( );
 	HINTERNET find = FtpFindFirstFileA( _connect, ( dir + "*" ).c_str( ), &find_data, INTERNET_FLAG_NO_CACHE_WRITE, 0 );
@@ -63,8 +64,8 @@ void Ftp::getFindData( std::string dir, std::vector< std::string >& data ) {
 }
 
 void Ftp::download( std::string ftp_path, std::string local_path ) {
-	convertString( ftp_path  , "/", "\\" );
-	convertString( local_path, "/", "\\" );
+	convertString( ftp_path  , "\\", "/" );
+	convertString( local_path, "\\", "/" );
 	//ディレクトリ
 	std::string dir;
 	{
@@ -78,7 +79,8 @@ void Ftp::download( std::string ftp_path, std::string local_path ) {
 		MakeSureDirectoryPathExists( dir.c_str( ) );
 	}
 
-	remove( local_path.c_str( ) );
+	DeleteFile( local_path.c_str( ) );
+	//remove( local_path.c_str( ) );
 
 	open( );
 	FtpGetFile(	_connect,
@@ -92,6 +94,8 @@ void Ftp::download( std::string ftp_path, std::string local_path ) {
 }
 
 void Ftp::upload( std::string ftp_path, std::string local_path ) {
+	convertString( ftp_path  , "/", "\\" );
+	convertString( local_path, "/", "\\" );
 	//FTPでアプリケーションを取得
 	open( );
 	FtpPutFile(	_connect,
@@ -103,6 +107,7 @@ void Ftp::upload( std::string ftp_path, std::string local_path ) {
 }
 
 void Ftp::deleteFile( std::string ftp_path ) {
+	convertString( ftp_path  , "/", "\\" );
 	open( );
 	FtpDeleteFileA( _connect, ftp_path.c_str( ) );
 	close( );

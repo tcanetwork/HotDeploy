@@ -8,19 +8,24 @@ public:
 	struct OptionData {
 		std::string name;
 		std::string exe_path;
-		std::string download_dir;
+		std::string ftp_dir;
+		std::string local_dir;
 	};
 public:
 	Option( );
 	virtual ~Option( );
 public:
-	int getId( ) const;
 	OptionData getData( int id ) const;
+	int getMachineId( ) const;
+	int getGameId( ) const;
 	int getMaxId( );
+public:
+	void setGameId( int id );
 private:
 	void load( );
 private:
-	int _id;
+	int _machine_id;
+	int _game_id;
 	std::map< int, OptionData > _data;
 };
 

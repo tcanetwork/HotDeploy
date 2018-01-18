@@ -17,7 +17,7 @@ static std::vector< std::string > splitString( std::string str, std::string div 
 	std::vector< std::string > result;
 	size_t end_pos = str.find( div );
 	size_t start_pos = 0;
-	if ( end_pos == std::string::npos ) {
+	if ( end_pos == std::string::npos || div == "" ) {
 		result.push_back( str );
 		return result;
 	}

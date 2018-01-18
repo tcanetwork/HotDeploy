@@ -1,18 +1,30 @@
 #pragma once
 #include <memory>
+#include <vector>
+#include <string>
 
 class GlobalDownloader {
 public:
-	GlobalDownloader( );
+	GlobalDownloader( std::shared_ptr< class Option > option );
 	virtual ~GlobalDownloader( );
 public:
 	void update( );
+	void draw( ) const;
+	bool isDownloading( ) const;
+private:
 	void download( );
-	bool isWaitingDownload( ) const;
+	void finishDownload( );
+	void entryDataBase( );
+	void refleshDataBase( );
+	bool isEntryDataBase( ) const;
 private:
-	void checkCommand( );
-private:
-	bool _wait_download;
+	int _count;
+	int _download_id;
+	int _now_download;
+	std::vector< std::string > _download_list;
 	std::shared_ptr< class Ftp > _ftp;
+	std::shared_ptr< class Ntp > _ntp;
+	std::shared_ptr< class DataBase > _db;
+	std::shared_ptr< class Option > _option;
 };
 

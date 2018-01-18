@@ -18,12 +18,7 @@ int File::getSize( std::string path ) {
 
 void File::load( std::string path, void* data, int size, FILETYPE type ) {
 	FILE* fp = NULL;
-	if ( type == FILETYPE_BINARY ) {
-		fopen_s( &fp, path.c_str( ), "rb" );
-	}
-	if ( type == FILETYPE_TEXT ) {
-		fopen_s( &fp, path.c_str( ), "rb" );
-	}
+	fopen_s( &fp, path.c_str( ), "rb" );
 
 	if ( fp == NULL ) {
 		return;
@@ -40,16 +35,10 @@ void File::save( std::string path, const void* data, int size, FILETYPE type ) {
 	createDir( path, 0 );
 	FILE* fp = NULL;
 
-	if ( type == FILETYPE_BINARY ) {
-		if ( fopen_s( &fp, path.c_str( ), "wb" ) != 0 ) {
-			return;	
-		}
+	if ( fopen_s( &fp, path.c_str( ), "wb" ) != 0 ) {
+		return;	
 	}
-	if ( type == FILETYPE_TEXT ) {
-		if ( fopen_s( &fp, path.c_str( ), "w" ) != 0 ) {
-			return;
-		}
-	}
+
 	fwrite( data, 1, size, fp );
 	fclose( fp );
 }

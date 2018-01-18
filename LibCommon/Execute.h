@@ -2,19 +2,18 @@
 #include <Windows.h>
 #include <memory>
 #include <string>
-#include "Log.h"
 
 class Execute {
 public:
-	Execute( std::string exe_path );
+	Execute( std::shared_ptr< class Option > option );
 	virtual ~Execute( );
 public:
 	void open( );
 	void close( );
+	bool isPlaying( ) const;
 private:
+	bool _playing;
 	SHELLEXECUTEINFOA _shell;
-	std::shared_ptr< Log > _log;
-	std::string _exe;
-	std::string _dir;
+	std::shared_ptr< class Option > _option;
 };
 

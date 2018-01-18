@@ -7,6 +7,8 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="WinSocket.cpp" />
     <ClCompile Include="Execute.cpp" />
+    <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="Ntp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File.h" />
@@ -16,5 +18,7 @@
     <ClInclude Include="WinSocket.h" />
     <ClInclude Include="Execute.h" />
     <ClInclude Include="stringConverter.h" />
+    <ClInclude Include="DataBase.h" />
+    <ClInclude Include="Ntp.h" />
   </ItemGroup>
 </Project>
