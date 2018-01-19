@@ -1,11 +1,8 @@
 #include "Ftp.h"
+#include "File.h"
 #include <string>
-#include <Shlwapi.h>
-#include <ImageHlp.h>
 #include "stringConverter.h"
 
-#pragma comment( lib, "Shlwapi.lib" )
-#pragma comment( lib, "imagehlp.lib" )
 
 const std::string IP = "160.16.140.103";
 const std::string USER = "ftpuser";
@@ -66,21 +63,11 @@ void Ftp::getFindData( std::string dir, std::vector< std::string >& data ) {
 void Ftp::download( std::string ftp_path, std::string local_path ) {
 	convertString( ftp_path  , "\\", "/" );
 	convertString( local_path, "\\", "/" );
-	//ディレクトリ
-	std::string dir;
-	{
-		char buf[ 128 ];
-		GetCurrentDirectory( 128, buf );
-		std::string::size_type dir_last_pos = max( ( int )local_path.find_last_of( "\\" ), ( int )local_path.find_last_of( "/" ) );
-		dir = ( std::string )buf + "\\" + local_path.substr( 0, dir_last_pos ) + "\\";
-		convertString( dir, "/", "\\" );
+	{//ディレクトリ
+		std::string dir = local_path.substr( 0, local_path.find_last_of( "/" ) );
+		std::shared_ptr< File >( )->createDir( dir );
 	}
-	if ( !PathIsDirectory( dir.c_str( ) ) ) {
-		MakeSureDirectoryPathExists( dir.c_str( ) );
-	}
-
-	DeleteFile( local_path.c_str( ) );
-	//remove( local_path.c_str( ) );
+	std::shared_ptr< File >( )->deleteFile( local_path );
 
 	open( );
 	FtpGetFile(	_connect,

@@ -1,5 +1,6 @@
 #include "Option.h"
 #include "File.h"
+#include "Console.h"
 #include "stringConverter.h"
 #include <memory>
 
@@ -90,6 +91,14 @@ void Option::load( ) {
 	}
 }
 
+std::map< int, Option::OptionData >::const_iterator Option::getDataBegin( ) const {
+	return _data.begin( );
+}
+
+std::map< int, Option::OptionData >::const_iterator Option::getDataEnd( ) const {
+	return _data.end( );
+}
+
 void Option::setGameId( int id ) {
 	_game_id = id;
 }
@@ -111,4 +120,37 @@ Option::OptionData Option::getData( int id ) const {
 
 int Option::getMaxId( ) {
 	return ( int )_data.size( );
+}
+
+void Option::drawGameList( ) const {
+	std::shared_ptr< Console > drawer;
+
+
+	int x = 0;
+	int y = 8;
+
+	drawer->draw( x, y, "-------------------------------Game Id List--------------------------------" );
+	int count = 0;
+	y++;
+	std::map< int, OptionData >::const_iterator ite = _data.begin( );
+	std::map< int, OptionData >::const_iterator end = _data.end( );
+	while ( ite != end ) {
+		int game_id = ( *ite ).first;
+		OptionData data = (*ite).second;
+		char buf[ 64 ];
+		sprintf_s( buf, "ID:%2d  %-18s", game_id, data.name.c_str( ) );
+		drawer->draw( x, y, buf );
+
+		x += 25;
+		ite++;
+		count++;
+		if ( count % 3 == 0 && ite != end ) {
+			y++;
+			x = 0;
+		}
+	}
+	x = 0;
+	y++;
+
+	drawer->draw( x, y, "---------------------------------------------------------------------------" );
 }

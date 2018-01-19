@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="Execute.cpp" />
     <ClCompile Include="File.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="WinSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Console.h" />
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="Execute.h" />
     <ClInclude Include="File.h" />

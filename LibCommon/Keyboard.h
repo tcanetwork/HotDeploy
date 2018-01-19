@@ -133,8 +133,6 @@ public:
 public:
 	bool isHitKey( KEY key ) const;
 private:
-	void checkInputKey( );
-private:
 	KEY _key;
 };
 

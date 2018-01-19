@@ -1,6 +1,12 @@
 #include "File.h"
+#include "stringConverter.h"
 #include <stdio.h>
 #include <direct.h>
+#include <Shlwapi.h>
+#include <ImageHlp.h>
+
+#pragma comment( lib, "Shlwapi.lib" )
+#pragma comment( lib, "imagehlp.lib" )
 
 const std::string VERSION_DIR = "version/";
 
@@ -99,4 +105,23 @@ void File::createDir( std::string path, std::string::size_type start_pos ) {
 			createDir( path, pos + 1 );
 		}
 	}
+}
+
+void File::createDir( std::string dir ) {
+	convertString( dir, "/", "\\" );
+	char buf[ 128 ];
+	GetCurrentDirectory( 128, buf );
+	dir = buf + ( std::string )"\\" + dir;
+
+	if ( !PathIsDirectory( dir.c_str( ) ) ) {
+		MakeSureDirectoryPathExists( dir.c_str( ) );
+	}
+}
+
+void File::deleteFile( std::string path ) {
+	convertString( path, "/", "\\" );
+	char buf[ 128 ];
+	GetCurrentDirectory( 128, buf );
+	path = buf + ( std::string )"\\" + path;
+	DeleteFile( path.c_str( ) );
 }

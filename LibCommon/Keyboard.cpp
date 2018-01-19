@@ -30,5 +30,5 @@ void Keyboard::update( ) {
 }
 
 bool Keyboard::isHitKey( KEY key ) const {
-	return _key == key;
+	return ( GetAsyncKeyState( key ) & 0x8000 ) != 0;
 }
