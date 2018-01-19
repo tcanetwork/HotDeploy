@@ -26,10 +26,11 @@ void GlobalDownloader::update( ) {
 	if ( isDownloading( ) ) {
 		download( );
 	} else {
-		if ( _count == 0 ) {
+		if ( _count > CHECK_INTERVAL ) {
 			refleshDataBase( );
+			_count = 0;
 		}
-		_count = ( _count + 1 ) % CHECK_INTERVAL;
+		_count++;
 	}
 }
 
@@ -38,7 +39,9 @@ bool GlobalDownloader::isDownloading( ) const {
 }
 
 void GlobalDownloader::download( ) {
+	//FtpPath
 	std::string ftp_path = _download_list[ _now_download ];
+	//LocalPath
 	std::string local_path = _option->getData( _download_id ).local_dir;
 	std::vector< std::string > split = splitString( ftp_path, _option->getData( _download_id ).ftp_dir );
 	if ( ( int )split.size( ) > 1 ) {
@@ -47,8 +50,10 @@ void GlobalDownloader::download( ) {
 		local_path += ftp_path;
 	}
 
+	//ダウンロード
 	_ftp->download( ftp_path, local_path );
 
+	//ダウンロード終了チェック
 	_now_download++;
 	if ( _now_download >= ( int )_download_list.size( ) ) {
 		finishDownload( );
