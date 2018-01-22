@@ -16,6 +16,7 @@ public:
 	virtual ~Option( );
 public:
 	void drawGameList( ) const;
+	void drawMachineInfo( ) const;
 public:
 	OptionData getData( int id ) const;
 	std::map< int, OptionData >::const_iterator getDataBegin( ) const;

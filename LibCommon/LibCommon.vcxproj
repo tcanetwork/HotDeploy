@@ -139,6 +139,7 @@
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="Execute.cpp" />
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="FpsController.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Ntp.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="Execute.h" />
     <ClInclude Include="File.h" />
+    <ClInclude Include="FpsController.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Ntp.h" />

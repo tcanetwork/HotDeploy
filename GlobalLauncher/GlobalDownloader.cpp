@@ -4,6 +4,7 @@
 #include "Option.h"
 #include "DataBase.h"
 #include "stringConverter.h"
+#include "Console.h"
 
 const int CHECK_INTERVAL = 180;
 
@@ -70,14 +71,17 @@ void GlobalDownloader::finishDownload( ) {
 }
 
 void GlobalDownloader::draw( ) const {
+	_option->drawMachineInfo( );
 	if ( isDownloading( ) ) {
 		int progress = _now_download * 100 / ( int )_download_list.size( );
-		printf_s( "ダウンロード中...%d%% \n", _now_download );
+		char buf[ 64 ];
+		sprintf_s( buf, "ダウンロード中...%d%% ", progress );
+		Console::get( )->draw( 0, 5, buf );
 	}
 }
 
 bool GlobalDownloader::isEntryDataBase( ) const {
-	std::vector< std::string > column = _db->selectColumn( "HotDeploy", "machine_id" );
+	std::vector< std::string > column = _db->selectColumn( TABLE_HOT_DEPLOY, COLUMN_MACHINE_ID );
 	int size = ( int )column.size( );
 	for ( int i = 0; i < size; i++ ) {
 		if ( std::atoi( column[ i ].c_str( ) ) == _option->getMachineId( ) ) {
@@ -90,7 +94,7 @@ bool GlobalDownloader::isEntryDataBase( ) const {
 
 void GlobalDownloader::entryDataBase( ) {
 	if ( !isEntryDataBase( ) ) {
-		_db->add( "HotDeploy", "machine_id", std::to_string( _option->getMachineId( ) ) );
+		_db->add( TABLE_HOT_DEPLOY, COLUMN_MACHINE_ID, std::to_string( _option->getMachineId( ) ) );
 	}
 	refleshDataBase( );
 }
@@ -98,16 +102,16 @@ void GlobalDownloader::entryDataBase( ) {
 void GlobalDownloader::refleshDataBase( ) {
 	_download_id = -1;
 	//データベースに最終更新時間を入れる
-	std::string condition = "machine_id=" + std::to_string( _option->getMachineId( ) );
-	_db->set( "HotDeploy", "last_reflesh_time", std::to_string( _ntp->getTime( ) ), condition );
+	std::string condition = COLUMN_MACHINE_ID + "=" + std::to_string( _option->getMachineId( ) );
+	_db->set( TABLE_HOT_DEPLOY, COLUMN_TIME, std::to_string( _ntp->getTime( ) ), condition );
 
 	//データベースからダウンロードチェック
-	std::vector< std::string > download_id = _db->selectColumn( "HotDeploy", "download_id", condition );
+	std::vector< std::string > download_id = _db->selectColumn( TABLE_HOT_DEPLOY, COLUMN_DOWNLOAD_ID, condition );
 	if ( ( int )download_id.size( ) > 1 ) {
 		_download_id = std::atoi( download_id[ 1 ].c_str( ) );
 
 		//データベースのダウンロードIDを削除
-		_db->set( "HotDeploy", "download_id", "-1", condition );
+		_db->set( TABLE_HOT_DEPLOY, COLUMN_DOWNLOAD_ID, "-1", condition );
 	}
 
 	//FTPファイル一覧取得

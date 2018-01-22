@@ -21,14 +21,10 @@ std::shared_ptr< class Keyboard > Keyboard::get( ) {
 	return keyboard;
 }
 
-
-void Keyboard::update( ) {
-	_key = KEY_NONE;
-	if ( _kbhit( ) ) {
-		_key = ( KEY )_getch( );
-	}
-}
-
 bool Keyboard::isHitKey( KEY key ) const {
 	return ( GetAsyncKeyState( key ) & 0x8000 ) != 0;
+}
+
+bool Keyboard::isHitKeyAny( ) const {
+	return _kbhit( ) > 0;
 }

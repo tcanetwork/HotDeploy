@@ -129,9 +129,8 @@ public:
 	Keyboard( );
 	virtual ~Keyboard( );
 public:
-	void update( );
-public:
 	bool isHitKey( KEY key ) const;
+	bool isHitKeyAny( ) const;
 private:
 	KEY _key;
 };

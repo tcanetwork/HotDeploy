@@ -3,7 +3,10 @@
 #include <string>
 #include <vector>
 
-
+const std::string TABLE_HOT_DEPLOY   = "HotDeploy";
+const std::string COLUMN_MACHINE_ID  = "machine_id";
+const std::string COLUMN_TIME        = "last_reflesh_time";
+const std::string COLUMN_DOWNLOAD_ID = "download_id";
 
 class DataBase {
 public:

@@ -1,53 +1,53 @@
 GameId:0
 Name:CypherGame0
 ExePath:Cypher.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher00\
+LocalDir:Cypher\
 
 GameId:1
 Name:CypherGame1
 ExePath:Cypher.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher01\
+LocalDir:Cypher\
 
 GameId:2
 Name:CypherGame2
 ExePath:Cypher.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher02\
+LocalDir:Cypher\
 
 GameId:3
-Name:CypherLive
+Name:CypherLive0
 ExePath:Live.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher00\
+LocalDir:Cypher\
 
 GameId:4
-Name:CypherLive
+Name:CypherLive1
 ExePath:Live.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher01\
+LocalDir:Cypher\
 
 GameId:5
-Name:CypherLive
+Name:CypherLive2
 ExePath:Live.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher02\
+LocalDir:Cypher\
 
 GameId:6
-Name:CypherController
+Name:CypherController0
 ExePath:Controller.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher00\
+LocalDir:Cypher\
 
 GameId:7
-Name:CypherController
+Name:CypherController1
 ExePath:Controller.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher01\
+LocalDir:Cypher\
 
 GameId:8
-Name:CypherController
+Name:CypherController2
 ExePath:Controller.exe
-FtpDir:Cypher\App\
-LocalDir:Cypher\App\
+FtpDir:HotDeploy\Cypher02\
+LocalDir:Cypher\
