@@ -46,10 +46,15 @@ bool Execute::isPlaying( ) const {
 }
 
 void Execute::checkPath( ) {
+	Option::OptionData data = _option->getData( _option->getGameId( ) );
+	if ( data.exe_path == "" ) {
+		return;
+	}
+
 	//Path
 	char buf[ 128 ];
 	GetCurrentDirectory( 128, buf );//フルパスでないと起動できない
-	Option::OptionData data = _option->getData( _option->getGameId( ) );
+
 	std::string exe = buf + ( std::string )"\\" + data.local_dir + data.exe_path;
 	convertString( exe, "/", "\\" );
 	if ( _shell.lpFile != NULL ) {

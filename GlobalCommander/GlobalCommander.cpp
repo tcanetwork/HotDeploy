@@ -64,11 +64,10 @@ int GlobalCommander::drawMachineList( int y ) const {
 int GlobalCommander::drawWaitCommand( int y ) const {
 	std::shared_ptr< Console > console = Console::get( );
 	if ( _next_input ) {
-		console->draw( 0, 0     , "入力中..." );
+		console->draw( 0, 0     , "入力中...   ※入力中はリストが更新されないので注意" );
 	} else {
-		console->draw( 0, 0     , "入力待機中" );
+		console->draw( 0, 0     , "入力待機中  ※入力中はリストが更新されないので注意" );
 	}
-	console->draw( 0, y += 1, "※入力中はアクティブマシンリストが更新されないので注意" );
 	console->draw( 0, y += 1, "Command Format : MachineId GameId" );
 	console->draw( 0, y += 1, "Command Example: 1 2" );
 	console->draw( 0, y += 2, "Command:" );

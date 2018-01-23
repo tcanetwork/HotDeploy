@@ -15,7 +15,8 @@ private:
 	void download( );
 	void finishDownload( );
 	void entryDataBase( );
-	void refleshDataBase( );
+	void refleshTimeDataBase( );
+	void checkDownloadDataBase( );
 	bool isEntryDataBase( ) const;
 private:
 	int _count;

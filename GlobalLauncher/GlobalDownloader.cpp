@@ -6,7 +6,8 @@
 #include "stringConverter.h"
 #include "Console.h"
 
-const int CHECK_INTERVAL = 30 * 100;
+const int CHECK_DOWNLOAD_INTERVAL = 30 * 2;//DBダウンロード更新
+const int REFLESH_TIME_INTERVAL   = 30 * 60;//DBタイム更新
 
 GlobalDownloader::GlobalDownloader( std::shared_ptr< class Option > option ) :
 _option( option ),
@@ -28,9 +29,11 @@ void GlobalDownloader::update( ) {
 	if ( isDownloading( ) ) {
 		download( );
 	} else {
-		if ( _count > CHECK_INTERVAL ) {
-			refleshDataBase( );
-			_count = 0;
+		if ( _count % CHECK_DOWNLOAD_INTERVAL == 0 ) {
+			checkDownloadDataBase( );
+		}
+		if ( _count % REFLESH_TIME_INTERVAL == 0 ) {
+			refleshTimeDataBase( );
 		}
 		_count++;
 	}
@@ -102,16 +105,15 @@ void GlobalDownloader::entryDataBase( ) {
 		std::string condition = COLUMN_MACHINE_ID + "=" + std::to_string( _option->getMachineId( ) );
 		_db->set( TABLE_HOT_DEPLOY, COLUMN_DOWNLOAD_ID, "-1", condition );
 	}
-	refleshDataBase( );
+	//refleshTimeDataBase( );
+	//checkDownloadDataBase( );
 }
 
-void GlobalDownloader::refleshDataBase( ) {
+void GlobalDownloader::checkDownloadDataBase( ) {
 	_download_id = -1;
-	//データベースに最終更新時間を入れる
-	std::string condition = COLUMN_MACHINE_ID + "=" + std::to_string( _option->getMachineId( ) );
-	_db->set( TABLE_HOT_DEPLOY, COLUMN_TIME, std::to_string( _ntp->getTime( ) ), condition );
 
 	//データベースからダウンロードチェック
+	std::string condition = COLUMN_MACHINE_ID + "=" + std::to_string( _option->getMachineId( ) );
 	std::vector< std::string > download_id = _db->selectColumn( TABLE_HOT_DEPLOY, COLUMN_DOWNLOAD_ID, condition );
 	if ( ( int )download_id.size( ) > 1 ) {
 		_download_id = std::atoi( download_id[ 1 ].c_str( ) );
@@ -127,4 +129,10 @@ void GlobalDownloader::refleshDataBase( ) {
 			finishDownload( );
 		}
 	}
+}
+
+void GlobalDownloader::refleshTimeDataBase( ) {
+	//データベースに最終更新時間を入れる
+	std::string condition = COLUMN_MACHINE_ID + "=" + std::to_string( _option->getMachineId( ) );
+	_db->set( TABLE_HOT_DEPLOY, COLUMN_TIME, std::to_string( _ntp->getTime( ) ), condition );
 }
