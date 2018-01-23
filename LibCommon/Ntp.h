@@ -28,10 +28,10 @@ private:
 	};
 private:
 	void open( );
-	unsigned long getCalcTime( );
+	unsigned long getTimeCalc( ) const;
+	unsigned long getTimeServer( );
 private:
 	int _socket;
-	bool _get;
 	bool _connect;
 	unsigned long _before_time;
 	int _before_count;

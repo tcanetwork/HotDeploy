@@ -1,3 +1,4 @@
+#pragma warning( disable:4091 )
 #include "File.h"
 #include "stringConverter.h"
 #include <stdio.h>

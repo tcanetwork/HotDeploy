@@ -6,11 +6,12 @@
 #include "Keyboard.h"
 #include "stringConverter.h"
 
-const int ACTIVE_TIME = 30;
-const int CHECK_INTERVAL = 120;
+const int ACTIVE_TIME = 100;
+const int CHECK_INTERVAL = 30 * 4;
 
 GlobalCommander::GlobalCommander( ) :
-_count( 0 ) {
+_count( 0 ),
+_next_input( false ) {
 	_ntp    = std::shared_ptr< Ntp      >( new Ntp      );
 	_option = std::shared_ptr< Option   >( new Option   );
 	_db     = std::shared_ptr< DataBase >( new DataBase );
@@ -31,31 +32,48 @@ void GlobalCommander::update( ) {
 }
 
 void GlobalCommander::draw( ) const {
-	drawMachineList( );
-	_option->drawGameList( );
-	drawWaitCommand( );
+	int y = drawMachineList( 1 );
+	y = _option->drawGameList( y + 1 );
+	y = drawWaitCommand( y + 2 );
 }
 
-void GlobalCommander::drawMachineList( ) const {
+int GlobalCommander::drawMachineList( int y ) const {
 	int x = 0;
-	int y = 0;
 	std::shared_ptr< Console > console = Console::get( );
-	console->draw( x, y++, "-----------------------------Active Machine Id-----------------------------" );
+	console->draw( x, y, "---------------------------Active Machine Id List---------------------------" );
 	
 	int size = ( int )_active_machine_id.size( );
-	x = -10;
+	const int WIDTH = 10;
+	x = -WIDTH;
+	y++;
 	for ( int i = 0; i < size; i++ ) {
 		if ( i % 8 == 0 && i != 0 ) {
-			x = -10;
+			x = -WIDTH;
 			y++;
 		}
 		char buf[ 64 ];
 		sprintf_s( buf, "ID:%2d", _active_machine_id[ i ] );
-		console->draw( x += 10, y, buf );
+		console->draw( x += WIDTH, y, buf );
 	}
 	x = 0;
 	y++;
-	console->draw( x, y, "---------------------------------------------------------------------------" );
+	console->draw( x, y, "----------------------------------------------------------------------------" );
+	return y + 1;
+}
+
+int GlobalCommander::drawWaitCommand( int y ) const {
+	std::shared_ptr< Console > console = Console::get( );
+	if ( _next_input ) {
+		console->draw( 0, 0     , "入力中..." );
+	} else {
+		console->draw( 0, 0     , "入力待機中" );
+	}
+	console->draw( 0, y += 1, "※入力中はアクティブマシンリストが更新されないので注意" );
+	console->draw( 0, y += 1, "Command Format : MachineId GameId" );
+	console->draw( 0, y += 1, "Command Example: 1 2" );
+	console->draw( 0, y += 2, "Command:" );
+	console->setCursorPosAfterDraw( 8, y );
+	return y;
 }
 
 
@@ -97,15 +115,23 @@ void GlobalCommander::checkActiveMachine( ) {
 
 void GlobalCommander::checkCommand( ) {
 	std::shared_ptr< Keyboard > key = Keyboard::get( );
-	if ( !key->isHitKeyAny( ) ) {
+	if ( !_next_input ) {
+		if ( !key->isHitKeyAny( ) ) {
+			return;
+		}
+		if ( key->isHitKey( Keyboard::KEY_RETURN ) ) {
+			key->refleshInputKey( );
+			return;
+		}
+		if ( key->isHitKey( Keyboard::KEY_ESCAPE ) ) {
+			key->refleshInputKey( );
+			return;
+		}
+		_next_input = true;
 		return;
 	}
-	if ( key->isHitKey( Keyboard::KEY_RETURN ) ) {
-		return;
-	}
-	if ( key->isHitKey( Keyboard::KEY_ESCAPE ) ) {
-		return;
-	}
+	_next_input = false;
+	//モード表示
 	std::shared_ptr< Console > console = Console::get( );
 	//入力
 	int machine_id = 0;
@@ -129,11 +155,4 @@ void GlobalCommander::checkCommand( ) {
 	}
 
 	_db->set( TABLE_HOT_DEPLOY, COLUMN_DOWNLOAD_ID, std::to_string( game_id ), condition );
-}
-
-void GlobalCommander::drawWaitCommand( ) const {
-	std::shared_ptr< Console > console = Console::get( );
-	console->draw( 0, 20, "Command Format: MachineId GameId" );
-	console->draw( 0, 22, "Command:" );
-	console->setCursorPosAfterDraw( 8, 22 );
 }

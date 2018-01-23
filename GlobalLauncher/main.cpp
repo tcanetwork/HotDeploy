@@ -39,5 +39,6 @@ void main( ) {
 
 bool isLoop( ) {
 	std::shared_ptr< Keyboard > keyboard = Keyboard::get( );
+	keyboard->update( );
 	return !keyboard->isHitKey( Keyboard::KEY_ESCAPE );
 }

@@ -85,14 +85,6 @@ void Option::load( ) {
 	}
 }
 
-std::map< int, Option::OptionData >::const_iterator Option::getDataBegin( ) const {
-	return _data.begin( );
-}
-
-std::map< int, Option::OptionData >::const_iterator Option::getDataEnd( ) const {
-	return _data.end( );
-}
-
 void Option::setGameId( int id ) {
 	_game_id = id;
 	std::string data = std::to_string( _game_id ).c_str( );
@@ -118,21 +110,21 @@ int Option::getMaxId( ) {
 	return ( int )_data.size( );
 }
 
-void Option::drawGameList( ) const {
+int Option::drawGameList( int y ) const {
 	std::shared_ptr< Console > console = Console::get( );
 
 
 	int x = 0;
-	int y = 7;
 
-	console->draw( x, y++, "-------------------------------Game Id List--------------------------------" );
-	
+	console->draw( x, y, "-------------------------------Game Id List--------------------------------" );
 	int count = 0;
 	x = -25;
+	y++;
+
 	std::map< int, OptionData >::const_iterator ite = _data.begin( );
 	std::map< int, OptionData >::const_iterator end = _data.end( );
 	while ( ite != end ) {
-		//Id Name
+		//Id,Name
 		int game_id = ( *ite ).first;
 		OptionData data = (*ite).second;
 		//•¶Žš—ñˆ—
@@ -152,6 +144,8 @@ void Option::drawGameList( ) const {
 	y++;
 
 	console->draw( x, y, "---------------------------------------------------------------------------" );
+
+	return y + 1;
 }
 
 void Option::drawMachineInfo( ) const {

@@ -6,12 +6,13 @@
 #include "stringConverter.h"
 #include "Console.h"
 
-const int CHECK_INTERVAL = 180;
+const int CHECK_INTERVAL = 30 * 100;
 
 GlobalDownloader::GlobalDownloader( std::shared_ptr< class Option > option ) :
 _option( option ),
 _download_id( -1 ),
-_now_download( 0 ) {
+_now_download( 0 ),
+_count( 0 ) {
 	_ftp = std::shared_ptr< Ftp >( new Ftp );
 	_ntp = std::shared_ptr< Ntp >( new Ntp );
 	_db  = std::shared_ptr< DataBase >( new DataBase );

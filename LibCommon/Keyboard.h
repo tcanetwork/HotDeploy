@@ -129,9 +129,14 @@ public:
 	Keyboard( );
 	virtual ~Keyboard( );
 public:
-	bool isHitKey( KEY key ) const;
+	void update( );
+public:
+	bool isHitKey ( KEY key ) const;
+	bool isPushKey( KEY key ) const;
+	bool isHoldKey( KEY key ) const;
 	bool isHitKeyAny( ) const;
+	void refleshInputKey( );
 private:
-	KEY _key;
+	char _key[ 256 ];
 };
 
