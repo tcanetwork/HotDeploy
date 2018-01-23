@@ -31,6 +31,7 @@ private:
 	unsigned long getCalcTime( );
 private:
 	int _socket;
+	bool _get;
 	bool _connect;
 	unsigned long _before_time;
 	int _before_count;

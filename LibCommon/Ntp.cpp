@@ -26,7 +26,8 @@ const UINT32 OPTION = htonl(//Œv32bit
 	( PREC & 0xff ) ); //8bit
 
 Ntp::Ntp( ) :
-_connect( false ) {
+_connect( false ),
+_get( false ) {
 	open( );
 }
 
@@ -109,13 +110,16 @@ unsigned long Ntp::getTime( ) {
 
 	//ŽžŠÔŒvŽZ
 	unsigned long time_s = ntohl( data.timestamp_transmit_s ) - NTP_TIME;
-
+	_get = true;
 	_before_count = GetTickCount( ) / 1000;
 	_before_time = time_s;
 	return time_s;
 }
 
 unsigned long Ntp::getCalcTime( ) {
+	if ( !_get ) {
+		return 0;
+	}
 	unsigned long count = GetTickCount( ) / 1000;
 	_before_time += count - _before_count;
 	_before_count = count;

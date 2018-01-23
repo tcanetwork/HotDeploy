@@ -64,8 +64,8 @@ void Ftp::download( std::string ftp_path, std::string local_path ) {
 	convertString( ftp_path  , "\\", "/" );
 	convertString( local_path, "\\", "/" );
 	{//ディレクトリ
-		std::string dir = local_path.substr( 0, local_path.find_last_of( "/" ) );
-		std::shared_ptr< File >( )->createDir( dir );
+		std::string dir = local_path.substr( 0, local_path.find_last_of( "/" ) ) + "/";
+		std::shared_ptr< File >( )->createDir( dir, 0 );
 	}
 	std::shared_ptr< File >( )->deleteFile( local_path );
 
@@ -75,7 +75,7 @@ void Ftp::download( std::string ftp_path, std::string local_path ) {
 		local_path.c_str( ),
 		FALSE,
 		FILE_ATTRIBUTE_ARCHIVE,
-		FTP_TRANSFER_TYPE_BINARY,
+		FTP_TRANSFER_TYPE_BINARY | INTERNET_FLAG_RELOAD,
 		0 );
 	close( );
 }

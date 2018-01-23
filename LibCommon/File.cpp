@@ -93,17 +93,17 @@ void File::checkVersion( int *version ) {
 }
 
 void File::createDir( std::string path, std::string::size_type start_pos ) {
-	std::string::size_type pos = path.find( "/", start_pos );
+	convertString( path, "/", "\\" );
+	std::size_t pos = path.find( "\\", start_pos );
+	char buf[ 128 ];
+	GetCurrentDirectory( 128, buf );
 	//スラッシュがあった場合はディレクトリ生成
-	if ( pos != std::string::npos ) {
+	while ( pos != std::string::npos ) {
 
-		std::string dir = path.substr( 0, pos );
+		std::string dir = buf + ( std::string )"\\" + path.substr( 0, pos );
 		_mkdir( dir.c_str( ) );
 
-		std::string::size_type next_pos = path.find( "/", pos + 1 );
-		if ( next_pos != std::string::npos ) {
-			createDir( path, pos + 1 );
-		}
+		pos = path.find( "\\", pos + 1 );
 	}
 }
 

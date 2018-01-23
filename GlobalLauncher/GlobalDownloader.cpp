@@ -98,6 +98,8 @@ bool GlobalDownloader::isEntryDataBase( ) const {
 void GlobalDownloader::entryDataBase( ) {
 	if ( !isEntryDataBase( ) ) {
 		_db->add( TABLE_HOT_DEPLOY, COLUMN_MACHINE_ID, std::to_string( _option->getMachineId( ) ) );
+		std::string condition = COLUMN_MACHINE_ID + "=" + std::to_string( _option->getMachineId( ) );
+		_db->set( TABLE_HOT_DEPLOY, COLUMN_DOWNLOAD_ID, "-1", condition );
 	}
 	refleshDataBase( );
 }
