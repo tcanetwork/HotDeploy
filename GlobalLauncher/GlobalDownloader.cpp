@@ -82,6 +82,9 @@ void GlobalDownloader::draw( ) const {
 
 bool GlobalDownloader::isEntryDataBase( ) const {
 	std::vector< std::string > column = _db->selectColumn( TABLE_HOT_DEPLOY, COLUMN_MACHINE_ID );
+	if ( ( int )column.size( ) > 0 ) {
+		column.erase( column.begin( ) );
+	}
 	int size = ( int )column.size( );
 	for ( int i = 0; i < size; i++ ) {
 		if ( std::atoi( column[ i ].c_str( ) ) == _option->getMachineId( ) ) {
