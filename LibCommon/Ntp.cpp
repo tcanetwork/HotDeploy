@@ -128,7 +128,7 @@ unsigned long Ntp::getTimeServer( ) {
 // ŒvZ
 //-----------------------------------------------------------------
 unsigned long Ntp::getTimeCalc( ) const {
-	int count = GetTickCount( ) / 1000;
-	unsigned long time = _before_count - _before_count + count;
-	return _before_time;
+	int now_count = GetTickCount( ) / 1000;
+	unsigned long time = _before_time + ( now_count - _before_count );
+	return time;
 }

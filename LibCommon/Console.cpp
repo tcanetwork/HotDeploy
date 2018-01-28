@@ -96,6 +96,6 @@ void Console::getConsoleSize( int& x, int& y ) {
 	HANDLE hCons = GetStdHandle( STD_OUTPUT_HANDLE );
 	CONSOLE_SCREEN_BUFFER_INFO info = CONSOLE_SCREEN_BUFFER_INFO( );
 	GetConsoleScreenBufferInfo( hCons, &info );
-	x = info.dwSize.X;
-	y = 25;
+	x = info.srWindow.Right;
+	y = info.srWindow.Bottom - 1;
 }
