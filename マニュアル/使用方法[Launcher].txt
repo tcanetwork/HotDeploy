@@ -1,0 +1,4 @@
+1.Option/MachineId.txtを開き、設定したいマシンIDを書き込む
+※マシンIDが被らないようにする
+
+2.Launcher.exeを起動する

@@ -15,6 +15,7 @@ void main( ) {
 	std::shared_ptr< FpsController > fps( new FpsController );
 	int count = 0;
 	while ( isLoop( ) ) {
+		console->update( );
 		commander->update( );
 
 		console->setCursorView( false );
