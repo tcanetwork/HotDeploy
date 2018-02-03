@@ -61,50 +61,50 @@ FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
 
 GameId:31
-Name:GatePanelEEN
-ExePath:GatePanelEEN.exe
-FtpDir:HotDeploy\Gate00\
-LocalDir:Gate\
-
-GameId:34
-Name:GatePanelEES
-ExePath:GatePanelEES.exe
-FtpDir:HotDeploy\Gate00\
-LocalDir:Gate\
-
-GameId:32
 Name:GatePanelENE
 ExePath:GatePanelENE.exe
 FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
 
+GameId:32
+Name:GatePanelEEN
+ExePath:GatePanelEEN.exe
+FtpDir:HotDeploy\Gate00\
+LocalDir:Gate\
+
 GameId:33
+Name:GatePanelEES
+ExePath:GatePanelEES.exe
+FtpDir:HotDeploy\Gate00\
+LocalDir:Gate\
+
+GameId:34
 Name:GatePanelESE
 ExePath:GatePanelESE.exe
 FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
 
-GameId:24
-Name:GatePanelWWS
-ExePath:GatePanelWWS.exe
+GameId:21
+Name:GatePanelWNW
+ExePath:GatePanelWNW.exe
 FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
 
-GameId:21
+GameId:22
 Name:GatePanelWWN
 ExePath:GatePanelWWN.exe
 FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
 
 GameId:23
-Name:GatePanelWSW
-ExePath:GatePanelWSW.exe
+Name:GatePanelWWS
+ExePath:GatePanelWWS.exe
 FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
 
-GameId:22
-Name:GatePanelWNW
-ExePath:GatePanelWNW.exe
+GameId:24
+Name:GatePanelWSW
+ExePath:GatePanelWSW.exe
 FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
 
@@ -131,3 +131,9 @@ Name:GatePanelSSW
 ExePath:GatePanelSSW.exe
 FtpDir:HotDeploy\Gate00\
 LocalDir:Gate\
+
+GameId:200
+Name:Enjoy
+ExPath:AttractionEnjoy.exe
+FtpDir:HotDeploy\Enjoy00\
+LocalDir:Enjoy\
